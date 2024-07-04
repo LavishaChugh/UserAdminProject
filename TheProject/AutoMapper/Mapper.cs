@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TheProject.Dtos;
+using TheProject.Services;
 
 namespace TheProject.AutoMapper
 {
@@ -17,6 +18,15 @@ namespace TheProject.AutoMapper
 
             CreateMap<GetUserDto, AddUserDto>();
             CreateMap<AddUserDto, GetUserDto>();
+            CreateMap<User, GetUserDto>();
+            CreateMap<UpdateUserDto, User>();
+
+            //CreateMap<Users, GetUserDto>()
+            //.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            //.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+            //.ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+            //.ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.Image))
+            //.ReverseMap();
         }
     }
 }

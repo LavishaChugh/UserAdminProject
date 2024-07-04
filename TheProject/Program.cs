@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -38,6 +39,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 builder.Services.AddHttpContextAccessor();
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MemoryBufferThreshold = Int32.MaxValue; 
+    options.ValueLengthLimit = Int32.MaxValue; 
+    options.MultipartBodyLengthLimit = Int64.MaxValue; 
+});
 
 
 var app = builder.Build();
@@ -53,10 +60,15 @@ app.UseHttpsRedirection();
 
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());   //to remove the cross policy error which comes when we connect angular to dot net
 
+
+app.UseStaticFiles();
+
 app.UseAuthentication();
 
-app.UseAuthorization();
-
 app.MapControllers();
+
+app.UseRouting();
+
+app.UseAuthorization();
 
 app.Run();

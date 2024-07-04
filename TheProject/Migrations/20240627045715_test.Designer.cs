@@ -12,8 +12,8 @@ using TheProject.Data;
 namespace TheProject.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240624110554_users")]
-    partial class users
+    [Migration("20240627045715_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,10 @@ namespace TheProject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -1,13 +1,14 @@
-﻿using TheProject.Dtos;
+﻿using Microsoft.AspNetCore.Mvc;
+using TheProject.Dtos;
 using TheProject.Models;
 
 namespace TheProject.Services
 {
     public interface IUser
     {
-        public Task<GetUserDto> AddUser(AddUserDto user);
+        public Task<GetUserDto> AddUser([FromForm] AddUserDto user);
 
-        public Task<List<GetUserDto>> GetUsers();
+        public Task<PagedResult<GetUserDto>> GetUsers(int pageIndex, int pageSize);
 
         public Task<GetUserDto> GetById(Guid id);
 
